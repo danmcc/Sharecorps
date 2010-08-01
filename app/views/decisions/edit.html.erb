@@ -1,0 +1,32 @@
+<h1>Editing decision</h1>
+
+<% form_for(@decision) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </p>
+  <p>
+    <%= f.label :creator_user_id %><br />
+    <%= f.text_field :creator_user_id %>
+  </p>
+  <p>
+    <%= f.label :summary %><br />
+    <%= f.text_field :summary %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :result %><br />
+    <%= f.text_field :result %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @decision %> |
+<%= link_to 'Back', decisions_path %>

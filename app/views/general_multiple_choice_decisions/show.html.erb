@@ -1,0 +1,23 @@
+General Yes/No Decision
+
+<p>
+<%= render :partial => "decisions/show" %>
+</p>
+<p>
+<% if @decision.result.nil? %>
+	<%= render :partial => "decisions/show_vote_note" %>
+
+	<% form_for([@project, @decision, @vote]) do |f| %>
+		<% @multiple_choice_options.each do |o| %>
+			<%= radio_button_tag "choice", o.option %> <%= o.option %><br>
+		<% end %>
+		<%= f.submit "Vote" %>
+	<% end %>
+<% end %>
+
+<%= render :partial => "decisions/show_results" %>
+
+</p>
+
+<%= link_to 'Back', project_path(@project) %>
+

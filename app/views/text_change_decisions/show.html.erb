@@ -1,0 +1,23 @@
+Name Change Decision
+
+<p>
+<%= render :partial => "decisions/show" %>
+</p>
+<p>
+<strong>Description:</strong> <br />
+<%= @general_yes_no_decision.description %>
+</p>
+<p>
+<% if @decision.result.nil? %>
+	<%= render :partial => "decisions/show_vote_note" %>
+
+	<%= link_to "Yes", "/projects/" + @project.id.to_s + "/decisions/" + @decision.id.to_s + "/votes/create?choice=Yes" %>
+	&nbsp; &nbsp;
+	<%= link_to "No", "/projects/" + @project.id.to_s + "/decisions/" + @decision.id.to_s + "/votes/create?choice=No" %>
+<% end %>
+</p>
+
+<%= render :partial => "decisions/show_results" %>
+
+<%= link_to 'Back', project_path(@project) %>
+

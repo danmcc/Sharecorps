@@ -1,0 +1,23 @@
+<h1>Listing shareholders for project <%= @project.name %></h1>
+
+<% if @shareholders.count > 0 %>
+		<table>
+		  <tr>
+			<th>User</th>
+			<th>Shares</th>
+		  </tr>
+
+		<% @shareholders.each do |shareholder| %>
+		  <tr>
+			<td><%= link_to shareholder.user.username, project_shareholder_path(:project_id => shareholder.project.id, :id => shareholder.id) %></td>
+			<td><%=h shareholder.num_shares %></td>
+		  </tr>
+		<% end %>
+		</table>
+<% else %>
+(none)
+<% end %>
+
+<br />
+
+<%= link_to 'Back', project_path(@project) %>

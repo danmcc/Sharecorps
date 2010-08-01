@@ -1,0 +1,24 @@
+<h1>Editing task_share</h1>
+
+<% form_for(@task_share) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :task_id %><br />
+    <%= f.text_field :task_id %>
+  </p>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :num_shares %><br />
+    <%= f.text_field :num_shares %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @task_share %> |
+<%= link_to 'Back', task_shares_path %>

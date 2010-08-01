@@ -1,0 +1,2 @@
+module WhoShouldDoSomethingDecisionsHelper
+end

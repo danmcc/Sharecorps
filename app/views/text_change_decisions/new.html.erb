@@ -1,0 +1,14 @@
+New Text Change Decision
+
+<% form_for([@project, @text_change_decision]) do |f| %>
+  <%= f.error_messages %>
+  <p>
+  	<%= render :partial => "decisions/new" %>
+  </p>
+  <p>
+	  Change <%= @text_change_decision.target_field %> to: <%= f.text_area :target_value %>
+  </p>
+<p>
+<%= f.submit 'Create' %>
+</p>
+<% end %>

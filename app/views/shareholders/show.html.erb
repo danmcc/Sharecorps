@@ -1,0 +1,16 @@
+<p>
+  <b>User:</b>
+  <%=h @shareholder.user_id %>
+</p>
+
+<p>
+  <b>Num shares:</b>
+  <%=h @shareholder.num_shares %>
+</p>
+
+<p>
+  <b>Shareholder since:</b>
+  <%=h @shareholder.created_at %>
+</p>
+
+<%= link_to 'Back', project_shareholders_path %>

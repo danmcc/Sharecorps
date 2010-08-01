@@ -1,0 +1,24 @@
+<h1>Editing shareholder</h1>
+
+<% form_for(@shareholder) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </p>
+  <p>
+    <%= f.label :num_shares %><br />
+    <%= f.text_field :num_shares %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @shareholder %> |
+<%= link_to 'Back', shareholders_path %>

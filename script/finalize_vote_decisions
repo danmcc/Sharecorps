@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../config/boot',  __FILE__)
+require 'DecisionsController'
+
+# look at all "work wanted" decisions to expand the share pool; finalize them if they've expired
+#   create "who should do something" decision if the result is yes
+decisions = Decision.find_all_by_expirate_date("2009-11-30")
+
+# look at all "who should do something" decisions; finalize them if they've expired

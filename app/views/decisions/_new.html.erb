@@ -1,0 +1,11 @@
+	<% fields_for @decision do |decision_fields| %>
+		<p>
+		<%= decision_fields.label :summary %><br />
+		<%= decision_fields.text_field :summary %>
+		</p>
+
+		<p>
+		<%= decision_fields.label :expiration_date %><br />
+		<%= decision_fields.date_select :expiration_date %>
+		</p>
+	<% end %>

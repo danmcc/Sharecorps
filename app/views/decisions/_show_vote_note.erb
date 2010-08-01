@@ -1,0 +1,23 @@
+<p>
+<% if @decision.result.nil? %>
+	<p>
+	<b>Expires On:</b>
+	<%=h @decision.expiration_date %>
+	</p>
+
+	<p>
+    <% if @my_vote.nil? %>
+		You have not yet voted.  You can vote by selecting an option, below
+	<% else %>
+		You have already voted, but may change your vote by selecting a new option, below<br/>
+		You voted: <%= @my_vote.choice %><br/>
+	<% end %>
+	</p>
+
+<% else %>
+  <b>Result:</b>
+  <%=h @decision.result %>
+  <%#  TODO: voting record %>
+<% end %>
+</p>
+

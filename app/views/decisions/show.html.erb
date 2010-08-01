@@ -1,0 +1,40 @@
+<p>
+  <b>Creator:</b>
+  <%=h @decision.creator_user.username %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%=h @decision.summary %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @decision.description %>
+</p>
+
+<p>
+<% if @decision.result == "" %> (fix me to be "is null")
+  <b>Expires On:</b>
+  <%=h @decision.expiration_date %>
+    <% if @my_vote == "" %>
+	You have not yet voted.  You can vote by selecting an option, below
+	<% else %>
+	You have already voted, but may change your vote by selecting a new option, below
+	<% end %>
+
+	< % if decision is a yes/no vote %>
+    link_to yes   link_to no
+    < % else if decision is to choose a task performer %>
+    dropdown list of volunteers
+	< % end %>
+  <%#  TODO: vote or change vote %>
+<% else %>
+  <b>Result:</b>
+  <%=h @decision.result %>
+  <%#  TODO: voting record %>
+<% end %>
+</p>
+
+
+<%= link_to 'Back', project_path(@project) %>

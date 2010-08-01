@@ -1,0 +1,15 @@
+New General Yes/No Decision
+
+<% form_for([@project, @general_yes_no_decision]) do |f| %>
+  <%= f.error_messages %>
+  <p>
+  	<%= render :partial => "decisions/new" %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+<p>
+<%= f.submit 'Create' %>
+</p>
+<% end %>

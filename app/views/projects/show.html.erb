@@ -1,0 +1,152 @@
+<p>
+  <b>Name:</b>
+  <%=h @project.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @project.name %>
+</p>
+
+<p>
+  <b>Total shares:</b>
+  <%=h @project.total_shares %>
+</p>
+
+<p>
+<b><%= link_to 'Shareholders', project_shareholders_path(@project) %></b>
+</p>
+
+<hr>
+<h1>Work</h1>
+
+<% if @user_is_a_shareholder %>
+<p><%= link_to 'Add Work Wanted', new_project_task_path(@project, :offered_or_wanted => "wanted") %> (only shareholders can do this)</p>
+<% end %>
+
+<h3>Current Work Wanted</h3>
+
+<p>
+These are tasks created by an existing shareholder who would like some work done.  Anyone can offer to complete these tasks, and upon successful completion will receive the number of shares offered.
+</p>
+<% if @current_work_wanted.count > 0 %>
+	<table>
+	  <tr>
+	    <th>Task</th>
+	    <th>Requester</th>
+	    <th>Shares<br>Offered</th>
+	  </tr>
+
+	<% @current_work_wanted.each do |task| %>
+	  <tr>
+		<td><%= link_to task.name, project_task_path(:project_id => @project, :id => task) %></td>
+	    <td><%=h task.requester_user ? task.requester_user.username : "Group" %></td>
+	    <td><%=h task.num_shares %></td>
+	  </tr>
+	<% end %>
+	</table>
+<% else %>
+(none)
+<% end %>
+</p>
+
+<h3>Current Work Offered</h3>
+
+<p><%= link_to 'Add Work Offered', new_project_task_path(@project, :offered_or_wanted => "offered") %></p>
+<p>
+These tasks can be created by any user (not just shareholders).  If more than 50% of shareholders agree to expand the share pool by the amount shown, or if any shareholder or group of shareholders agrees to exchange their own shares for the amount shown, the work can proceed.
+</p>
+<% if @current_work_offered.count > 0 %>
+		<table>
+		  <tr>
+			<th>Task</th>
+			<th>Creator</th>
+			<th>Shares<br>Wanted</th>
+		  </tr>
+
+		<% @current_work_offered.each do |task| %>
+		  <tr>
+			<td><%= link_to task.name, project_task_path(:project_id => @project, :id => task) %></td>
+			<td><%=h task.requester_user.username %></td>
+			<td><%=h task.num_shares %></td>
+		  </tr>
+		<% end %>
+		</table>
+<% else %>
+(none)
+<% end %>
+</p>
+
+<h3>Past Work</h3>
+<p>
+These are tasks that have been completed.
+</p>
+<% if @past_work.count > 0 %>
+		<table>
+		  <tr>
+			<th>Task</th>
+			<th>Performer</th>
+			<th>Shares Exchanged</th>
+		  </tr>
+		<% @past_work.each do |task| %>
+		  <tr>
+			<td><%= link_to task.name, project_task_path(:project_id => @project, :id => task) %></td>
+			<td><%=h task.requester_user.username %></td>
+			<td><%=h task.num_shares %></td>
+		  </tr>
+		<% end %>
+		</table>
+<% else %>
+(none)
+<% end %>
+</p>
+
+<hr>
+<h1>Decisions/Votes</h1>
+
+<% if @user_is_a_shareholder %>
+<p><%= link_to 'Propose a Vote', new_project_decision_path(@project) %></p>
+<% end %>
+
+<p>
+  <b>Decisions in Progress</b>
+<% if @current_decisions.count > 0 %>
+<table>
+  <tr>
+    <th>Summary</th>
+    <th>Expires On</th>
+  </tr>
+<% @current_decisions.each do |decision| %>
+  <tr>
+    <td><%= link_to decision.summary, eval("project_" + decision.decidable_type.underscore + "_path(:project_id => @project, :id => decision.decidable_id)") %></td>
+    <td><%= decision.expiration_date %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+(none)
+<% end %>
+</p>
+
+<p>
+  <b>Past Decisions</b>
+<% if @past_decisions.count > 0 %>
+<table>
+  <tr>
+    <th>Summary</th>
+    <th>Result</th>
+  </tr>
+
+<% @past_decisions.each do |decision| %>
+  <tr>
+    <td><%= link_to decision.summary, eval("project_" + decision.decidable_type.underscore + "_path(:project_id => @project, :id => decision.decidable_id)") %></td>
+    <td><%= decision.result %></td>
+  </tr>
+<% end %>
+</table>
+<% else %>
+(none)
+<% end %>
+</p>
+
+<%= link_to 'Back', projects_path %>

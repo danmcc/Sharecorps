@@ -1,0 +1,41 @@
+<h1>Work <%= @task.offered_or_wanted %></h1>
+
+<% form_for([@project, @task]) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :offered_or_wanted %>
+  <p>
+    <%= f.label :summary %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :days_to_complete %><br />
+	In how many days would you like this work completed?  Use this to set expectations and prevent tasks from taking years. <br/>
+	<%= f.text_field :days_to_complete, :size => 3, :maxlength => 3 %>
+  </p>
+  <p>
+  <% if @task.offered_or_wanted == "wanted" %>
+	  <p>
+	  Would you like to offer your own shares for this work, or have the group vote on expanding the share pool?
+	  </p>
+
+	  <input type="radio" name="how_to_grant_shares" value="offer_own_shares" checked> I want to offer my own shares (You have <%= @shares_available %> to offer) <br />
+	  <input type="radio" name="how_to_grant_shares" value="group_vote_to_expand"> Let the group vote on expanding the share pool <br/>
+
+<% else %>
+	How many shares would you like in exchange for this work? <br/>
+	(There are <%= @project.total_shares %> total shares for this project) <br/>
+<% end %>
+
+Number of shares to offer: <%= f.text_field :num_shares, :size => 8, :maxlength => 8 %>
+
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', project_path(@project) %>

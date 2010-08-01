@@ -1,0 +1,40 @@
+<h1>Editing task</h1>
+
+<% form_for(@task) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :days_to_complete %><br />
+    <%= f.text_field :days_to_complete %>
+  </p>
+  <p>
+    <%= f.label :project_id %><br />
+    <%= f.text_field :project_id %>
+  </p>
+  <p>
+    <%= f.label :requester_user_id %><br />
+    <%= f.text_field :requester_user_id %>
+  </p>
+  <p>
+    <%= f.label :performer_user_id %><br />
+    <%= f.text_field :performer_user_id %>
+  </p>
+  <p>
+    <%= f.label :num_shares %><br />
+    <%= f.text_field :num_shares %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @task %> |
+<%= link_to 'Back', tasks_path %>

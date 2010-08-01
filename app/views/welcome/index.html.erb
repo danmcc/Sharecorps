@@ -1,0 +1,17 @@
+<h1>Welcome to ShareCorps</h1>
+
+<table>
+  <tr>
+    <th>Project Name</th>
+  </tr>
+
+<% @projects.each do |project| %>
+  <tr>
+    <td><%= link_to project.name, project %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Start a New project', new_project_path %>

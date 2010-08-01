@@ -1,0 +1,11 @@
+<h1>New decision</h1>
+
+<p>
+	What kind of decision would you like to create?
+</p>
+<%= link_to "General Yes/No Decision", new_project_general_yes_no_decision_path(@project) %><br />
+<%= link_to "General Multiple Choice Decision", new_project_general_multiple_choice_decision_path(@project) %><br />
+<%= link_to "Decide Who Should Do Something" %><br />
+<%= link_to "Decide to Change the Project Name", new_project_text_change_decision_path(@project, :target_field => "name") %><br />
+<%= link_to "Decide to Change the Project Summary", new_project_text_change_decision_path(@project, :target_field => "summary") %><br />
+<%= link_to "Decide to Change the Project Description", new_project_text_change_decision_path(@project, :target_field => "description") %><br />

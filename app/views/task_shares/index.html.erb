@@ -1,0 +1,24 @@
+<h1>Listing task_shares</h1>
+
+<table>
+  <tr>
+    <th>Task</th>
+    <th>User</th>
+    <th>Num shares</th>
+  </tr>
+
+<% @task_shares.each do |task_share| %>
+  <tr>
+    <td><%=h task_share.task_id %></td>
+    <td><%=h task_share.user_id %></td>
+    <td><%=h task_share.num_shares %></td>
+    <td><%= link_to 'Show', task_share %></td>
+    <td><%= link_to 'Edit', edit_task_share_path(task_share) %></td>
+    <td><%= link_to 'Destroy', task_share, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New task_share', new_task_share_path %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  general_multiple_choice_decision_id: 1
+  option: MyString
+
+two:
+  general_multiple_choice_decision_id: 1
+  option: MyString

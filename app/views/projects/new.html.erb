@@ -1,0 +1,30 @@
+<h1>New project</h1>
+
+<% form_for(@project) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+	Please describe your project in as much detail as possible.  Important points to include are:
+	<ul>
+		<li> Why you created the project
+		<li> What programming language(s) your project uses
+		<li> If you plan to make money, and if so, how
+		<li> What you hope your project develops into by opening it up
+		<li> A little bit about your philosophy and ideology as a project creator
+		<li> Whether you're comfortable giving up more than 50% of the project ownership
+	</ul>
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :total_shares %><br />
+    <%= f.text_field :total_shares %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>

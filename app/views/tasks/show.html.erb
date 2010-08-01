@@ -1,0 +1,130 @@
+Task for project <%= @project.name %>
+
+<p>
+  <b>Name:</b>
+  <%=h @task.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @task.description %>
+</p>
+
+<p>
+  <b>Days to complete:</b>
+  <%=h @task.days_to_complete %>
+</p>
+
+<p>
+  <b>Requester:</b>
+  <%=h @task.requester_user.nil? ? "Group" : @task.requester_user.username %>
+</p>
+
+<p>
+  <b>Performer:</b>
+  <%=h @task.performer_user_id == 0 ? "(not assigned)" : @task.performer_user.username %>
+</p>
+
+<p>
+  <b>Shares:</b>
+  <%=h @task.num_shares %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @task.task_status.status %>
+</p>
+
+<p>
+  <b>Created:</b>
+  <%=h @task.created_at %>
+</p>
+
+<% if @can_mark_as_abandoned %>
+	<p><%= link_to 'Mark this task as abandoned', project_task_path(@project, @task, :status => "abandoned"), :method => "put" %></p>
+<% end %>
+
+<hr>
+
+<% if !@who_should_do_task_decision.nil? %>
+	<p><%= link_to "Offer to do this work", user_collection_path(@who_should_do_task_decision.user_collections.first, :add_user_id => @current_user_id), :method => "put" %></p>
+	<p>Vote on who should do this work</p>
+	<p>These people have offered to do this work:</p>
+	<p>
+	<% if (@who_should_do_task_decision.user_collections.first.users.length > 0) %>
+		<table>
+			<tr>
+				<th>Username</th>
+			</tr>
+			<% @task.decisions[0].user_collections[0].users.each do |user| %>
+				<tr>
+					<td><%= user.username %></td>
+					<%# TODO: if I'm a shareholder... %>
+					<td><%= link_to "Vote For", project_decision_votes_path(@project.id, @who_should_do_task_decision.decision.id, @who_vote.id, "choice" => user.id), :method => "create" %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		(no one has offered yet)
+	<% end %>
+	</p>
+<% else %>
+	<p><b>Pay For This Work With Your Own Shares</b></p>
+	<% form_for([@project, @task_share]) do |f| %>
+		<%= f.hidden_field :task_id %>
+		<p>Offer <%= f.text_field :num_shares %> of your <%= @shares_available %> shares for this work to be done</p>
+		<%= f.submit 'Update' %>
+	<% end %>
+	Current offers:
+	<% if @all_task_shares.count > 0 %>
+		<table>
+			<tr>
+				<th>Shareholder</th>
+				<th>Shares<br>Offered</th>
+			</tr>
+		<% @all_task_shares.each do |ts| %>
+			<tr>
+				<td><%=h ts.user.username %></td>
+				<td>
+					<%=h ts.num_shares %>
+					<% if ts.user.id == @current_user_id %>
+						<%= link_to "[delete]", [@project, ts], :method => :delete %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+		</table>
+	<% else %>
+		(none)
+	<% end %>
+	<hr>
+	<p><b>Pay For This Work By Expanding the Share Pool</b></p>
+	<p>Vote to expand the share pool by <%=h @task.num_shares %> shares</p>
+	<p>
+	Your vote: 
+	<%= link_to "Yes", project_decision_votes_path(@project.id, @expand_share_pool_decision.decision.id, @vote.id, "choice" => "Yes" ), :method => "create" %>
+	<%= link_to "No", project_decision_votes_path(@project.id, @expand_share_pool_decision.decision.id, @vote.id, "choice" => "No" ), :method => "create" %>
+	<%= link_to "Abstain", project_decision_votes_path(@project.id, @expand_share_pool_decision.decision.id, @vote.id, "choice" => "Abstain" ), :method => "create" %>
+	</p>
+	<p>All Votes:</p>
+	<% if @expand_share_pool_votes.count > 0 %>
+		<table>
+			<tr>
+				<th>Shareholder</th>
+				<th>Shares</th>
+				<th>Vote</th>
+			</tr>
+			<% @expand_share_pool_votes.each do |v| %>
+				<tr>
+					<td><%=h v.shareholder.user.username %></td>
+					<td><%=h v.num_shares %></td>
+					<td><%=h v.choice %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+<% end %>
+
+<p> 
+<%= link_to 'Back', project_path(@project) %>
+</p>

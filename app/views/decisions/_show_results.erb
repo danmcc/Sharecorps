@@ -1,0 +1,22 @@
+<% if ! @decision.result.nil? %>
+	<p>
+	  <b>Final Result:</b>
+	  <%=h @decision.result %>
+	</p>
+<% end %>
+
+<p>
+<b>Vote Breakdown:</b>
+	<table border=1>
+		<tr>
+			<th>Shareholder</th>
+			<th>Choice</th>
+		</tr>
+	<% @all_votes.each do |v| %>
+		<tr>
+			<td><%= v.user.username %></td>
+			<td><%= v.choice %></td>
+		</tr>
+	<% end %>
+	</table>
+</p>

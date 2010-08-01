@@ -1,0 +1,26 @@
+New General Yes/No Decision
+
+<% form_for([@project, @general_multiple_choice_decision]) do |f| %>
+	<%= f.error_messages %>
+	<p>
+		<%= render :partial => "decisions/new" %>
+	</p>
+  
+	<p>
+	<%= f.label :question %>
+	<%= f.text_field :question %>
+	</p>
+	<p>
+  <table>
+	  <% 1.upto(10) do |n| %>
+		  <tr>
+			  <td><%= n.to_s %></td>
+			  <td><input type="text" name="<%= "option" + n.to_s %>"></td>
+		  </tr>
+	  <% end %>
+	</table>
+  </p>
+<p>
+<%= f.submit 'Create' %>
+</p>
+<% end %>
